@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM2级事件处理程序</title>
+</head>
+
+<body>
+    <button id="btn">Click Me</button>
+    <script>
+        let btn = document.getElementById('btn');
+        // 这种移除事件处理程序不生效
+        // btn.addEventListener('click', function(){
+        //     alert(this.id);
+        // },false);
+        // btn.addEventListener('click', function () {
+        //     console.log(123);
+        // },false);
+
+        // 如果在监听器里面写个匿名函数，移除事件处理程序是不生效的
+        // btn.removeEventListener('click', function () {
+        //     console.log(this.id);
+        // }, false);
+        let handler = function () {
+            console.log(123);
+        };
+        btn.addEventListener('click', handler, false);
+        btn.removeEventListener('click', handler, false);
+
+    </script>
+</body>
+
+</html>

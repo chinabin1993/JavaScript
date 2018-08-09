@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML事件--contextmenu</title>
+    <style>
+        .myBox {
+            position: relative;
+        }
+
+        .lists {
+            width: 200px;
+            position: absolute;
+            visibility: hidden;
+            background-color: #999999;
+            padding: 15px 20px;
+            list-style: none;
+        }
+
+        .lists li {
+            height: 30px;
+            margin: 10px 0;
+            border-bottom: 1px solid #333333;
+            color: #ffffff;
+        }
+
+        .lists li a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myBox">当你右键点击我时，会出现自定义事件，当你单击时，自定义取消。</div>
+    <ul class="lists">
+        <li>
+            <a href="http://www.baidu.com">百度一下，你就知道</a>
+        </li>
+        <li>
+            <a href="http://www.google.com">Google</a>
+        </li>
+        <li>
+            <a href="http://cn.bing.com">必应</a>
+        </li>
+        <li>努力学习，好好工作</li>
+        <li>月薪50k</li>
+    </ul>
+    <script src="EventUtil.js"></script>
+    <script>
+        EventUtil.addHandler(window, 'load', function(){
+            let myBox = document.getElementById('myBox'),
+                menu = document.querySelector('.lists');
+            EventUtil.addHandler(myBox, 'contextmenu', function (event) {
+                event = EventUtil.getEvent(event);
+                EventUtil.preventDefault(event);
+                menu.style.visibility = 'visible';
+                menu.style.left = event.clientX + 'px';
+                menu.style.top = event.clientY + 'px';
+            });
+            EventUtil.addHandler(document, 'click', function(event){
+                menu.style.visibility = 'hidden';
+            });
+        });
+    </script>
+</body>
+
+</html>

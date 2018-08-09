@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IE事件处理程序</title>
+</head>
+<body>
+    <button id="btn">Click Me</button>
+    <script>
+    let btn = document.getElementById('btn');
+    // 注意这里是 on开口的事件处理程序名
+    btn.attachEvent('onclick', function(){
+        console.log(123);
+    });
+    btn.attachEvent('onclick', function(){
+        console.log(456);
+    });
+    //456
+    //123
+    </script>
+</body>
+</html>

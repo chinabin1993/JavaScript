@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM0级事件处理程序</title>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+
+    <script>
+        // DOM0级事件处理程序，被认为是元素的方法，所以这时事件处理程序是在当前元素的作用域下运行的。
+        // this指向的就是当前作用域
+        let myButton = document.getElementById('myButton');
+        myButton.onclick = function(event){
+            console.log(this.id);//myButton
+        }
+        // 删除DOM0级事件处理程序的方法是将事件处理程序的属性的值设置为null
+        myButton.onclick = null;
+    </script>
+</body>
+</html>
