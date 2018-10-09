@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #main{
+        /* column-width: 202px; */
+        column-count: 2;
+        column-gap: 0;
+    }
+    .box{
+        /* padding: 15px 7px 0 7px;
+        float: left; */
+        break-inside: avoid; box-sizing: border-box; padding: 10px;
+    }
+    .pic{
+        border: 1px solid #dddddd;
+    }
+    .pic img{
+        width: 165px;
+        padding: 10px;
+    }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div class="box">
+            <div class="pic">
+                <img src="./1.jpeg" alt="png">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="./2.jpg" alt="png">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="./3.jpg" alt="png">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="./4.jpg" alt="png">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

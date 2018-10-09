@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 箭头函数要明白两个概念：
+         * 1、箭头函数内部的this，帮定的是父上下文，是按照词法作用域进行绑定的
+         * 2、由于箭头函数是按照的词法作用域进行绑定，所以使用call和apply调用箭头函数时，无法对this进行绑定
+         */ 
+        var age = '25';
+        var name = '路飞';
+        debugger;
+        let obj = {
+            name: '索隆',
+            fun1: function () {
+                console.log(this.name);
+            },
+            fun2: () => console.log(this,this.name)
+        };
+        
+        obj.fun1();
+        // func2的父作用域是全局作用域。所以指向的是window里面的name
+        obj.fun2();
+   
+        // 测试箭头函数情况下，能否使用call和apply进行绑定this
+        var birth = 2000;
+        let obj1 = {
+            birth: 1993,
+            getAge: function (year) {
+                var b = this.birth;
+                var fn = (y) => {
+                    return y - this.birth;
+                }
+                console.log(fn.call({ birth: 2000 }, year));
+                // return fn.call({birth: 2000}, year);
+            }
+        }
+        obj1.getAge(2019)
+    </script>
+</body>
+
+</html>

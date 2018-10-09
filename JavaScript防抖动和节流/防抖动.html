@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript防抖动和节流</title>
+    <style>
+        #myBox {
+            height: 200px;
+            width: 300px;
+            border: 1px solid #333333;
+            overflow: scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myBox">
+        <h1>Hello World</h1>
+        <h1>Hello World</h1>
+        <h1>Hello World</h1>
+        <h1>Hello World</h1>
+        <h1>Hello World</h1>
+    </div>
+    <script>
+        let myBox = document.getElementById('myBox');
+        function debounce(fn, wait) {
+            var timeout = null;
+            return function () {
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+                timeout = setTimeout(fn, wait);
+            }
+        }
+        // 处理函数
+        function handle() {
+            console.log(Math.random());
+        }
+        // 滚动事件
+        // myBox.addEventListener('scroll', debounce(handle, 500));
+
+        // setTimeout方法是挂载window对象上的。
+        // 超时调用的代码都是在全局作用域中执行，因此函数中的this指向的是window对象，严格模式中指向的是undefined
+        // var timeout = null;
+        // myBox.addEventListener('scroll', function () {
+        //     if (timeout) {
+        //         clearTimeout(timeout)
+        //     }
+        //     timeout = setTimeout(function () {
+        //         console.log(123);
+        //     }, 500);
+        // })
+
+
+
+        //  节流：预先设置一个执行周期，当调用动作的时刻大于等于执行周期
+        var throttle = function (delay, action) {
+            var last = 0;
+            return function () {
+                var curr = +new Date()
+                if (curr - last > delay) {
+                    action.apply(this, arguments)
+                    last = curr
+                }
+            }
+        }
+        // myBox.addEventListener('scroll', throttle(1000, handle));
+
+
+        // 数组去重
+        var arr = [1, 2, 3, 3, 4, 4, 4, 4, 5, 5, 6, 7];
+        console.log(arr.indexOf(3));
+        function unique(arr) {
+            var result = [];
+            for (let item of arr) {
+                if (result.indexOf(item) === -1) {
+                    result.push(item);
+                }
+            }
+            return result;
+        }
+
+        var arr1 = ['a','b','b','c','d','a'];
+        function unique3(arr) {
+            let result = [];
+            result = arr.filter(function (item, index, self) {
+                console.log(self.indexOf(item),'======', index);
+                // return self.indexOf(item) === index;
+            })
+            return result;
+        }
+        console.log('aaaaaaaa',unique3(arr1));
+
+
+
+        console.log(unique(arr));
+        function unique1(arr) {
+            return Array.from(new Set(arr));
+        }
+        console.log(unique1(arr));
+
+        var objArr = [{ a: 123 }, { a: 456 }, { a: 789 }, { a: 123 }];
+        function unique2(arr) {
+            var result = [];
+            for (let item of arr) {
+                var repeat = false;
+                for (var r of result) {
+                    if (JSON.stringify(r) === JSON.stringify(item)) {
+                        repeat = true;
+                        break;
+                    }
+                }
+                if (!repeat) {
+                    result.push(item);
+                }
+            }
+            return result;
+        }
+        console.log(unique2(objArr));
+
+
+
+        //  数组去重的几种方式
+        // 利用for...of循环
+        function unique1(arr){
+            let result = [];
+            for(let item of arr){
+                if(result.indexOf(item) === -1){
+                    result.push(item);
+                }
+            }
+            return result;
+        }
+        // 利用set
+        function unique2(arr){
+            return [...new Set(arr)]
+        }
+        // 利用filter
+        function unique3(arr){
+            let result = [];
+            result = arr.filter(function(item, index, self){
+                return self.indexOf(item) === index;
+            })
+            return result;
+        }
+        // 利用双for循环
+        function unique4(arr){
+            let result = [];
+            for(let i of arr){
+                let tmp = false;
+                for(let j of result){
+                    if(i === j){
+                        tmp = true;
+                        break;
+                    }
+                }
+                if(!tmp){
+                    result.push(i)
+                }
+            }
+            return result;
+        }
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
